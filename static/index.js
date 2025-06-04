@@ -1,6 +1,7 @@
 const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
 
-(function(w) {
+(function (w) {
+    //gameTapEventの実行回数を入力
     let recursive_count = parseInt(prompt("一度の実行回数を設定して", "1"));
 
     function getJsonI18N(lang = 'zh') {
