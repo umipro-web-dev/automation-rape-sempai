@@ -1,6 +1,8 @@
 const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
 
 (function(w) {
+    let recursive_count = parseInt(prompt("一度の実行回数を設定して", "1"));
+
     function getJsonI18N(lang = 'zh') {
     return $.ajax({
         url: `./static/i18n/${lang}.json`,
@@ -311,30 +313,28 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
     }
 
     async function gameTapEvent() {
-        console.log("e")
-        if (_gameOver) {
-            return false;
-        }
-        p = _gameBBList[_gameBBListIndex];
-        if (true) {
-            if (!_gameStart) {
-                gameStart();
+            console.log("e")
+            if (_gameOver) {
+                return false;
             }
-            if (soundMode === 'on') {
-                createjs.Sound.play("tap");
-            }
-            tar = document.getElementById(p.id);
-            tar.className = tar.className.replace(_ttreg, ' tt$1');
-            _gameBBListIndex++;
-            _gameScore++;
+            p = _gameBBList[_gameBBListIndex];
+                if (!_gameStart) {
+                    gameStart();
+                }
+                if (soundMode === 'on') {
+                    createjs.Sound.play("tap");
+                }
+                tar = document.getElementById(p.id);
+                tar.className = tar.className.replace(_ttreg, ' tt$1');
+                _gameBBListIndex++;
+                _gameScore++;
 
-            updatePanel();
+                updatePanel();
 
-            gameLayerMoveNextRow();
+        gameLayerMoveNextRow();
         
-        }
-        setTimeout(gameTapEvent, 0)
-        return false;
+        for (let i = 0; i < recursive_count; i++) setTimeout(gameTapEvent, 0)
+        
     }
 
     function createGameLayer() {
